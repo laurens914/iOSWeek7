@@ -34,11 +34,11 @@
 
 -(id)pop
 {
-// with linked list
+// with linked list, not quite sure what to do here with a linked list. i know we want to remove the last object and then make the next to last object the tail, not sure if this is the right track. 
     id popLLObjc = nil;
-    if(self.head){
-        popLLObjc = self.head.objc;
-        self.head = self.head.node;
+    if(self.tail){
+        popLLObjc = self.tail.objc;
+        self.tail = self.tail.node;
     }
     return popLLObjc;
     
