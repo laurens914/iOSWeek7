@@ -22,13 +22,11 @@
     
     for (int a = 0; a < stringLength; a ++)
     {
-        int stringOneCount = 0;
-        int stringTwoCount = 0;
         for(int b = 0; b < stringLength; b ++){
             if ([stringOne characterAtIndex:a] == [stringTwo characterAtIndex:b]){
-                stringOneCount++;
+                continue;
             } if ([stringTwo characterAtIndex:b] == [stringOne characterAtIndex:a]){
-                stringTwoCount++;
+                continue;
             }
         }
     }
