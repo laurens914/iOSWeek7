@@ -9,16 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "LLNode.h"
 @interface Stack : NSObject
-{
-    NSMutableArray * stackArray;
-    NSInteger count;
-}
-
-@property LLNode *head;
-@property LLNode *tail;
-
--(void)push: (id) value;
--(id)pop;
--(void)clear;
+//{
+//    NSMutableArray * stackArray;
+//    NSInteger count;
+//}
+//
+//@property LLNode *head;
+//@property LLNode *tail;
+//
+//-(void)push: (id) value;
+//-(id)pop;
+//-(void)clear;
 
 @end
+
+//
+//@interface LinkedListStack :NSObject
+//
+//-(void) push:(LLNode *)node;
+

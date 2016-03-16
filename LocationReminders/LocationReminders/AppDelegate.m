@@ -17,7 +17,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [self setupParse];
+//    [self saveLocationToParse];
+    [self getLocations];
     return YES;
 }
 -(void)setupParse{
@@ -27,6 +29,32 @@
         configuration.server = @"http://localhost:1337/parse";
     }];
     [Parse initializeWithConfiguration:configuration];
+}
+
+-(void)saveLocationToParse
+{
+    PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:45.92 longitude:63.342];
+    PFObject *gregorianStation = [PFObject objectWithClassName:@"Place"];
+    gregorianStation[@"location"] = geoPoint;
+    
+    [gregorianStation saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error){
+            NSLog(@"%@", error);
+        }if (succeeded){
+            NSLog(@"success saving to database");
+        }
+    }];
+}
+
+-(void)getLocations{
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Place"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        for (PFObject *object in objects) {
+            PFGeoPoint *geoPoint = (PFGeoPoint *)object[@"location"];
+            NSLog(@"GeoPoint is:%@", geoPoint);
+        }
+    }];
 }
 
 @end

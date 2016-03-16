@@ -10,7 +10,7 @@
 
 @interface LLNode : NSObject
 @property id objc;
-@property LLNode * node;
+@property LLNode * nextNode;
 
 -(instancetype)initWithobjc:(id) objc;
 
