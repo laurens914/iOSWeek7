@@ -18,6 +18,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self registerForNotifications];
     [self setupParse];
 //    [self saveLocationToParse];
     [self getLocations];
@@ -59,5 +60,13 @@
         }
     }];
 }
+
+-(void)registerForNotifications{
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound  categories:nil];
+    
+    [[UIApplication sharedApplication]registerUserNotificationSettings:settings];
+}
+
+
 
 @end

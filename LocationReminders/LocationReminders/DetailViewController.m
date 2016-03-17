@@ -48,14 +48,19 @@
     NSNumber * radiusNumber = [numberString numberFromString:self.reminderRadius.text];
     reminder.radius = radiusNumber;
     reminder.location = [PFGeoPoint geoPointWithLatitude:self.coordinate.latitude longitude:self.coordinate.longitude];
-    if(self.completion){
-        if([CLLocationManager isMonitoringAvailableForClass:[CLCircularRegion class]]) {
-            CLCircularRegion *region = [[CLCircularRegion alloc]initWithCenter:self.coordinate radius:radiusNumber.doubleValue identifier:reminder.name];
-            [[[LocationController sharedLocation]locationManager]startMonitoringForRegion:region];
-            self.completion([MKCircle circleWithCenterCoordinate:self.coordinate radius:radiusNumber.doubleValue]);
-            [[self navigationController]popViewControllerAnimated:YES];
+    [reminder saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(error == nil && succeeded){
+            if(self.completion){
+                if([CLLocationManager isMonitoringAvailableForClass:[CLCircularRegion class]]) {
+                    CLCircularRegion *region = [[CLCircularRegion alloc]initWithCenter:self.coordinate radius:radiusNumber.doubleValue identifier:reminder.name];
+                    [[[LocationController sharedLocation]locationManager]startMonitoringForRegion:region];
+                    self.completion(reminder.name, [MKCircle circleWithCenterCoordinate:self.coordinate radius:radiusNumber.doubleValue],region);
+                    [[self navigationController]popViewControllerAnimated:YES];
+                }
+            }
         }
-    }
+    }];
+
 }
 
 -(void)showAlertView

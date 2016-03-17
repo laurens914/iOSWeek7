@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @import MapKit;
 
-typedef void(^DetailViewControllerCompletion)(MKCircle *circle);
+typedef void(^DetailViewControllerCompletion)(NSString *title, MKCircle *circle, CLCircularRegion * region);
 
 @interface DetailViewController : UIViewController
 @property (copy, nonatomic) NSString * annotationTitle;

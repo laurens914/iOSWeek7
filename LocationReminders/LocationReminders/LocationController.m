@@ -7,6 +7,7 @@
 //
 
 #import "LocationController.h"
+@import UIKit;
 
 @interface LocationController () <CLLocationManagerDelegate>
 @end
@@ -43,6 +44,10 @@ static LocationController *sharedLocation = nil;
 
 -(void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
-    //
+    NSLog(@"User Entered Region");
+    UILocalNotification *notification = [[UILocalNotification alloc]init];
+    notification.alertTitle = @"You Entered ..."; //app name
+    notification.alertBody = @"compelte your task"; //remember to pick up: reminder.name
+    [[UIApplication sharedApplication]presentLocalNotificationNow:notification];
 }
 @end

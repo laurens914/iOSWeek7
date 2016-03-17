@@ -144,12 +144,17 @@
     if ([segue.identifier isEqualToString:@"DetailViewController"]){
         if ([sender isKindOfClass:[MKAnnotationView class]]){
             MKAnnotationView *annotationView = (MKAnnotationView *)sender;
+            MKPointAnnotation *annotation = (MKPointAnnotation *)annotationView.annotation;
             DetailViewController *detailViewController = (DetailViewController *)[segue destinationViewController];
             detailViewController.annotationTitle = annotationView.annotation.title;
             detailViewController.coordinate = annotationView.annotation.coordinate;
             __weak typeof (self) weakSelf = self;
-            detailViewController.completion = ^(MKCircle *circle){
-                [weakSelf.mapView addOverlay:circle];
+            detailViewController.completion = ^(NSString *title, MKCircle *circle, CLCircularRegion* region){
+                __strong typeof (self) strongSelf = weakSelf;
+                [strongSelf.mapView addOverlay:circle];
+                [strongSelf.locationManager startMonitoringForRegion:region];
+                [annotation setTitle:title];
+                
             };
         }
     }
