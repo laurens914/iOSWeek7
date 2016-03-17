@@ -11,8 +11,11 @@
 @import CoreLocation;
 #import "DetailViewController.h"
 #import "LocationController.h"
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 
-@interface MapViewController () <MKMapViewDelegate>
+
+@interface MapViewController () <MKMapViewDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
@@ -27,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self login];
     [self setupMap];
 }
 -(void) viewWillAppear:(BOOL)animated{
@@ -41,7 +45,7 @@
 
 -(void)requestPermissions{
     [self setLocationManager:[[CLLocationManager alloc]init]];
-    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager requestAlwaysAuthorization];
     
 }
 - (void)didReceiveMemoryWarning {
@@ -62,23 +66,65 @@
 -(void)locationControllerDidUpdateLocation{
     
 }
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+    CLLocationCoordinate2D location;
+    location.latitude = userLocation.coordinate.latitude;
+    location.longitude = userLocation.coordinate.longitude;
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location, 500, 500);
+    [_mapView setRegion:region animated:YES];
+    
+}
+
+-(void)login{
+    if (![PFUser currentUser]){
+        PFLogInViewController *loginViewController = [[PFLogInViewController alloc]init];
+        loginViewController.delegate = self;
+        loginViewController.signUpController.delegate = self;
+        [self presentViewController:loginViewController animated:YES completion:nil];
+    } else {
+        [self setupAdditionalUI];
+    }
+}
+-(void)setupAdditionalUI{
+    UIBarButtonItem *signoutButton = [[UIBarButtonItem alloc]initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(signOut)];
+    self.navigationItem.leftBarButtonItem = signoutButton;
+}
+
+-(void)signOut{
+    [PFUser logOut];
+    [self login];
+}
+
+-(void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self setupAdditionalUI];
+}
+
+-(void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self setupAdditionalUI];
+}
+  
+  
+  
+  
 - (IBAction)japonessaSelected:(UIButton *)sender {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.60818, -122.33938);
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 400, 400);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 500, 500);
     [_mapView setRegion:region animated:TRUE];
     
 }
 
 - (IBAction)centuryLinkSelected:(UIButton *)sender {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.5952, -122.3316);
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 400, 400);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 500, 500);
     [_mapView setRegion:region animated:TRUE];
 }
 
 
 - (IBAction)starbucksSelected:(UIButton *)sender {
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(47.60998949, -122.34273612);
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 400, 400);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 500, 500);
     [_mapView setRegion:region animated:TRUE];
 }
 
@@ -101,6 +147,10 @@
             DetailViewController *detailViewController = (DetailViewController *)[segue destinationViewController];
             detailViewController.annotationTitle = annotationView.annotation.title;
             detailViewController.coordinate = annotationView.annotation.coordinate;
+            __weak typeof (self) weakSelf = self;
+            detailViewController.completion = ^(MKCircle *circle){
+                [weakSelf.mapView addOverlay:circle];
+            };
         }
     }
 }
@@ -123,6 +173,14 @@
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
     [self performSegueWithIdentifier:@"DetailViewController" sender:view];
+}
+
+-(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay{
+    MKCircleRenderer *renderer = [[MKCircleRenderer alloc]initWithOverlay:overlay];
+    renderer.strokeColor = [UIColor lightGrayColor];
+    renderer.fillColor = [UIColor purpleColor];
+    renderer.alpha = 0.5;
+    return renderer;
 }
 @end
 

@@ -37,6 +37,9 @@
 		894B5A361C989FBE00DD2BFD /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 894B5A351C989FBE00DD2BFD /* DetailViewController.m */; };
 		894B5A391C989FE100DD2BFD /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 894B5A381C989FE100DD2BFD /* LocationController.m */; };
 		894B5A3C1C991AFE00DD2BFD /* TuesdayCodeChallenge.m in Sources */ = {isa = PBXBuildFile; fileRef = 894B5A3B1C991AFE00DD2BFD /* TuesdayCodeChallenge.m */; };
+		894B5A621C99D0EA00DD2BFD /* Reminder.m in Sources */ = {isa = PBXBuildFile; fileRef = 894B5A611C99D0EA00DD2BFD /* Reminder.m */; };
+		894B5A791C9A050600DD2BFD /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 894B5A781C9A050600DD2BFD /* NSString+Additions.m */; };
+		894B5A7C1C9A0E2800DD2BFD /* WednesdayCodingChallenge.m in Sources */ = {isa = PBXBuildFile; fileRef = 894B5A7B1C9A0E2800DD2BFD /* WednesdayCodingChallenge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +83,12 @@
 		894B5A381C989FE100DD2BFD /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
 		894B5A3A1C991AFE00DD2BFD /* TuesdayCodeChallenge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuesdayCodeChallenge.h; sourceTree = "<group>"; };
 		894B5A3B1C991AFE00DD2BFD /* TuesdayCodeChallenge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuesdayCodeChallenge.m; sourceTree = "<group>"; };
+		894B5A601C99D0EA00DD2BFD /* Reminder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reminder.h; sourceTree = "<group>"; };
+		894B5A611C99D0EA00DD2BFD /* Reminder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reminder.m; sourceTree = "<group>"; };
+		894B5A771C9A050600DD2BFD /* NSString+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Additions.h"; sourceTree = "<group>"; };
+		894B5A781C9A050600DD2BFD /* NSString+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
+		894B5A7A1C9A0E2800DD2BFD /* WednesdayCodingChallenge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WednesdayCodingChallenge.h; sourceTree = "<group>"; };
+		894B5A7B1C9A0E2800DD2BFD /* WednesdayCodingChallenge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WednesdayCodingChallenge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,18 +150,15 @@
 				894B59FD1C97203500DD2BFD /* LaunchScreen.storyboard */,
 				894B5A001C97203500DD2BFD /* Info.plist */,
 				894B59EF1C97203500DD2BFD /* Supporting Files */,
-				894B5A311C976E2100DD2BFD /* LLNode.h */,
-				894B5A321C976E2100DD2BFD /* LLNode.m */,
-				894B5A2B1C974CB700DD2BFD /* Stack.h */,
-				894B5A3A1C991AFE00DD2BFD /* TuesdayCodeChallenge.h */,
-				894B5A3B1C991AFE00DD2BFD /* TuesdayCodeChallenge.m */,
-				894B5A2C1C974CB700DD2BFD /* Stack.m */,
-				894B5A2E1C974CC100DD2BFD /* Queue.h */,
-				894B5A2F1C974CC100DD2BFD /* Queue.m */,
+				894B5A631C99EF5A00DD2BFD /* CodeChallenges */,
 				894B5A341C989FBE00DD2BFD /* DetailViewController.h */,
 				894B5A351C989FBE00DD2BFD /* DetailViewController.m */,
 				894B5A371C989FE100DD2BFD /* LocationController.h */,
 				894B5A381C989FE100DD2BFD /* LocationController.m */,
+				894B5A601C99D0EA00DD2BFD /* Reminder.h */,
+				894B5A611C99D0EA00DD2BFD /* Reminder.m */,
+				894B5A771C9A050600DD2BFD /* NSString+Additions.h */,
+				894B5A781C9A050600DD2BFD /* NSString+Additions.m */,
 			);
 			path = LocationReminders;
 			sourceTree = "<group>";
@@ -188,6 +194,23 @@
 			);
 			name = Frameworks;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		894B5A631C99EF5A00DD2BFD /* CodeChallenges */ = {
+			isa = PBXGroup;
+			children = (
+				894B5A311C976E2100DD2BFD /* LLNode.h */,
+				894B5A321C976E2100DD2BFD /* LLNode.m */,
+				894B5A2B1C974CB700DD2BFD /* Stack.h */,
+				894B5A3A1C991AFE00DD2BFD /* TuesdayCodeChallenge.h */,
+				894B5A3B1C991AFE00DD2BFD /* TuesdayCodeChallenge.m */,
+				894B5A2C1C974CB700DD2BFD /* Stack.m */,
+				894B5A2E1C974CC100DD2BFD /* Queue.h */,
+				894B5A2F1C974CC100DD2BFD /* Queue.m */,
+				894B5A7A1C9A0E2800DD2BFD /* WednesdayCodingChallenge.h */,
+				894B5A7B1C9A0E2800DD2BFD /* WednesdayCodingChallenge.m */,
+			);
+			name = CodeChallenges;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,7 +291,10 @@
 				894B5A301C974CC100DD2BFD /* Queue.m in Sources */,
 				894B5A331C976E2100DD2BFD /* LLNode.m in Sources */,
 				894B5A2D1C974CB700DD2BFD /* Stack.m in Sources */,
+				894B5A621C99D0EA00DD2BFD /* Reminder.m in Sources */,
+				894B5A7C1C9A0E2800DD2BFD /* WednesdayCodingChallenge.m in Sources */,
 				894B5A3C1C991AFE00DD2BFD /* TuesdayCodeChallenge.m in Sources */,
+				894B5A791C9A050600DD2BFD /* NSString+Additions.m in Sources */,
 				894B59F71C97203500DD2BFD /* MapViewController.m in Sources */,
 				894B5A391C989FE100DD2BFD /* LocationController.m in Sources */,
 				894B59F41C97203500DD2BFD /* AppDelegate.m in Sources */,

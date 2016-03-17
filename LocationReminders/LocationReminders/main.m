@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 #import "TuesdayCodeChallenge.h"
+#import "WednesdayCodingChallenge.h"
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
@@ -16,8 +17,11 @@ int main(int argc, char * argv[]) {
         NSString *stringTwo = @"vessel";
         NSString *stringThree = @"seahawks";
         NSString *stringFour =@"mariners";
+        NSString *sumString =@"testing 1 2 3,4/5";
     [TuesdayCodeChallenge anagrams:stringOne stringTwo:stringTwo];
     [TuesdayCodeChallenge anagrams:stringThree stringTwo:stringFour];
+        [WednesdayCodingChallenge sumOfNumbersOnly:sumString];
+//        [WednesdayCodingChallenge sumNum:sumString];
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
 
     }

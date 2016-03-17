@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "Reminder.h"
 
 @interface AppDelegate ()
 
@@ -23,12 +24,14 @@
     return YES;
 }
 -(void)setupParse{
+    
     ParseClientConfiguration * configuration = [ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration>  _Nonnull configuration) {
         configuration.applicationId = @"htrdfkyg";
         configuration.clientKey = @"gfckhjglk";
         configuration.server = @"http://localhost:1337/parse";
     }];
     [Parse initializeWithConfiguration:configuration];
+    [Reminder registerSubclass];
 }
 
 -(void)saveLocationToParse

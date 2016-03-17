@@ -40,4 +40,9 @@ static LocationController *sharedLocation = nil;
     [self setLocation:[locations lastObject]];
     
 }
+
+-(void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
+{
+    //
+}
 @end

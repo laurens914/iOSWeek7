@@ -60,7 +60,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
+	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This App requires your location when in use. </string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
