@@ -13,6 +13,7 @@
 #import "LocationController.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import "Reminder.h"
 
 
 @interface MapViewController () <MKMapViewDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
@@ -37,6 +38,7 @@
     [super viewWillAppear:animated];
     [[[LocationController sharedLocation]delegate]self];
     [[[LocationController sharedLocation]locationManager]startUpdatingLocation];
+    [self getReminders];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -186,6 +188,30 @@
     renderer.fillColor = [UIColor purpleColor];
     renderer.alpha = 0.5;
     return renderer;
+}
+
+-(void)getReminders{
+    PFQuery *query = [PFQuery queryWithClassName:@"Reminder"];
+    __weak typeof(self) weakSelf = self;
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        if(error == nil){
+            NSMutableArray * points = [[NSMutableArray alloc]init];
+            NSMutableArray *radius = [[NSMutableArray alloc]init];
+            for (Reminder * object in objects){
+                MKPointAnnotation * point = [[MKPointAnnotation alloc]init];
+                CLLocationCoordinate2D location = CLLocationCoordinate2DMake(object.location.latitude, object.location.longitude);
+                point.coordinate = location;
+                point.title = object.name;
+                [points addObject:point];
+                MKCircle *circle= [MKCircle circleWithCenterCoordinate:location radius:object.radius.doubleValue];
+                [radius addObject:circle];
+              
+            }
+            [strongSelf.mapView addAnnotations:points];
+            [strongSelf.mapView addOverlays:radius];
+        }
+    }];
 }
 @end
 

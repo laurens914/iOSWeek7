@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @import MapKit;
+#import "DetailViewController.h"
 
 @protocol LocationControllerDelegate
 -(void)locationControllerDidUpdateLocation:(CLLocation *)location;
